@@ -15,12 +15,12 @@ h1{color:#b30059;margin-bottom:15px}
 p{color:#555;margin-top:10px;font-size:14px}
 .heart{position:fixed;color:#ff4d88;font-size:20px;animation:float 6s linear infinite;opacity:.7}
 @keyframes float{0%{transform:translateY(100vh) scale(.8)}100%{transform:translateY(-10vh) scale(1.2)}}
-iframe{display:none}
+#player{position:absolute;width:0;height:0;border:0}
 </style>
 </head>
 <body><div id="start">
     <button id="openBtn">Ábreme 💌</button>
-</div><!-- Música instrumental (YouTube oculto) --><iframe id="musicFrame" src="https://www.youtube.com/embed/rtOvBOTyX00?enablejsapi=1"></iframe><div class="card" id="card">
+</div><!-- reproductor oculto --><iframe id="player" src="https://www.youtube.com/embed/rtOvBOTyX00?enablejsapi=1&playsinline=1" allow="autoplay; encrypted-media"></iframe><div class="card" id="card">
     <h1>No es el día, es tu compañía</h1>
     <img src="carta.png" alt="Carta de amor">
     <p>Hecho con cariño 💖</p>
@@ -28,13 +28,16 @@ iframe{display:none}
 const btn=document.getElementById('openBtn');
 const start=document.getElementById('start');
 const card=document.getElementById('card');
-const frame=document.getElementById('musicFrame');
+const player=document.getElementById('player');
 
 btn.onclick=()=>{
     start.style.opacity='0';
     setTimeout(()=>start.style.display='none',800);
     card.classList.add('show');
-    frame.src += "&autoplay=1";
+
+    // forzar autoplay después de interacción del usuario
+    player.src = "https://www.youtube.com/embed/rtOvBOTyX00?autoplay=1&playsinline=1";
+
     setInterval(createHeart,500);
 }
 
