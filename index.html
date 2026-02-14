@@ -15,13 +15,12 @@ h1{color:#b30059;margin-bottom:15px}
 p{color:#555;margin-top:10px;font-size:14px}
 .heart{position:fixed;color:#ff4d88;font-size:20px;animation:float 6s linear infinite;opacity:.7}
 @keyframes float{0%{transform:translateY(100vh) scale(.8)}100%{transform:translateY(-10vh) scale(1.2)}}
+iframe{display:none}
 </style>
 </head>
 <body><div id="start">
     <button id="openBtn">Ábreme 💌</button>
-</div><audio id="music" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-</audio><div class="card" id="card">
+</div><!-- Música instrumental (YouTube oculto) --><iframe id="musicFrame" src="https://www.youtube.com/embed/rtOvBOTyX00?enablejsapi=1"></iframe><div class="card" id="card">
     <h1>No es el día, es tu compañía</h1>
     <img src="carta.png" alt="Carta de amor">
     <p>Hecho con cariño 💖</p>
@@ -29,13 +28,13 @@ p{color:#555;margin-top:10px;font-size:14px}
 const btn=document.getElementById('openBtn');
 const start=document.getElementById('start');
 const card=document.getElementById('card');
-const music=document.getElementById('music');
+const frame=document.getElementById('musicFrame');
 
 btn.onclick=()=>{
     start.style.opacity='0';
     setTimeout(()=>start.style.display='none',800);
     card.classList.add('show');
-    music.play();
+    frame.src += "&autoplay=1";
     setInterval(createHeart,500);
 }
 
