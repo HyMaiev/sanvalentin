@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No es el día, es tu compañía</title>
+<style>
+body{margin:0;height:100vh;background:linear-gradient(135deg,#ffd1dc,#ffe6f0,#fff5f7);font-family:Georgia,serif;overflow:hidden;display:flex;justify-content:center;align-items:center}
+#start{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#ff9ab5,#ffc1d6);z-index:5;box-shadow:inset 0 0 80px rgba(0,0,0,.2)}
+#openBtn{padding:18px 38px;font-size:22px;border:none;border-radius:40px;background:white;color:#c2185b;box-shadow:0 10px 25px rgba(0,0,0,.25);cursor:pointer;transition:.3s}
+#openBtn:hover{transform:scale(1.1)}
+.card{opacity:0;transform:scale(.9) translateY(20px);transition:1.5s ease;text-align:center;background:white;padding:22px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.15);max-width:92%}
+.card.show{opacity:1;transform:scale(1) translateY(0)}
+img{max-width:100%;border-radius:12px}
+h1{color:#b30059;margin-bottom:15px}
+p{color:#555;margin-top:10px;font-size:14px}
+.heart{position:fixed;color:#ff4d88;font-size:20px;animation:float 6s linear infinite;opacity:.7}
+@keyframes float{0%{transform:translateY(100vh) scale(.8)}100%{transform:translateY(-10vh) scale(1.2)}}
+</style>
+</head>
+<body><div id="start">
+    <button id="openBtn">Ábreme 💌</button>
+</div><audio id="music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio><div class="card" id="card">
+    <h1>No es el día, es tu compañía</h1>
+    <img src="carta.png" alt="Carta de amor">
+    <p>Hecho con cariño 💖</p>
+</div><script>
+const btn=document.getElementById('openBtn');
+const start=document.getElementById('start');
+const card=document.getElementById('card');
+const music=document.getElementById('music');
+
+btn.onclick=()=>{
+    start.style.opacity='0';
+    setTimeout(()=>start.style.display='none',800);
+    card.classList.add('show');
+    music.play();
+    setInterval(createHeart,500);
+}
+
+function createHeart(){
+    const heart=document.createElement('div');
+    heart.className='heart';
+    heart.innerHTML='❤';
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.fontSize=(12+Math.random()*24)+'px';
+    heart.style.animationDuration=(4+Math.random()*4)+'s';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+</script></body>
+</html>
